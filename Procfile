@@ -1,1 +1,1 @@
-web: python housing.py
+web: python census_data.py
