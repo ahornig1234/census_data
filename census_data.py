@@ -1,4 +1,4 @@
-import csv, plotly
+import csv, plotly, matplotlib.pyplot as plt
 #import matplotlib.pyplot as plt, numpy
 
 import zipfile
