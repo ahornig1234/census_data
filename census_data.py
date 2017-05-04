@@ -2,6 +2,7 @@ import csv
 #import plotly
 import matplotlib.pyplot as plt
 import numpy
+import Tkinter
 
 import zipfile
 zip_ref = zipfile.ZipFile('data.zip', 'r')
