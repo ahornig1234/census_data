@@ -1,5 +1,7 @@
-import csv, plotly, matplotlib.pyplot as plt
-#import matplotlib.pyplot as plt, numpy
+import csv
+import plotly
+import matplotlib.pyplot as plt
+import numpy
 
 import zipfile
 zip_ref = zipfile.ZipFile('data.zip', 'r')
@@ -120,8 +122,31 @@ with open('ss15pnm.csv', 'rb') as csvfile:
 #  if i<10: print i
 
 #~~~~~~~~~~~~PLOTS~~~~~~~~~~~~~~~~
+#plt.plot(figA, filename='fracsplot')
+#plt.plot(figB, filename='valuesplot')
+#plt.plot(figC, filename='aid_vs_rentfrac')
 
-#plotly.tools.set_credentials_file(username='andrew.hornig', api_key='2rmy1ANWqVZHMQAkip7Y')
+plt.plot([7,4,3], [6,2,1])
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#~~~~~~~~~~~plotly plots~~~~~~~~~~~~~
+
 trace1 = plotly.graph_objs.Scatter(
   x = incs1, y = rentfracs, mode = 'markers',
   marker = dict(symbol = 'circle',
@@ -266,10 +291,12 @@ figA = plotly.graph_objs.Figure(data = [trace1, trace2], layout=layout1)
 figB = plotly.graph_objs.Figure(data = [trace3, trace4], layout=layout2)
 figC = plotly.graph_objs.Figure(data = [traceC], layout = layoutC)
 
-plotly.offline.plot(figA, filename='fracsplot.html')
-plotly.offline.plot(figB, filename='valuesplot.html')
-plotly.offline.plot(figC, filename='aid_vs_rentfrac.html')
-
+#plotly.tools.set_credentials_file(username='andrew.hornig', api_key='2rmy1ANWqVZHMQAkip7Y')
 #plotly.plotly.iplot(figA, filename='fracsplot.html')
 #plotly.plotly.iplot(figB, filename='valuesplot.html')
 #plotly.plotly.iplot(figC, filename='aid_vs_rentfrac.html')
+
+#plotly.offline.plot(figA, filename='fracsplot.html')
+#plotly.offline.plot(figB, filename='valuesplot.html')
+#plotly.offline.plot(figC, filename='aid_vs_rentfrac.html')
+
