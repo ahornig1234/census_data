@@ -128,9 +128,9 @@ with open('ss15pnm.csv', 'rb') as csvfile:
 
 plt.plot([7,4,3], [6,2,1])
 #plt.show()
-fig = plt.figure()
-fig.savefig('fig1.pdf', bbox_inches='tight')
-
+#fig = plt.figure()
+plt.savefig('fig.pdf', bbox_inches='tight')
+plt.close()
 
 
 
