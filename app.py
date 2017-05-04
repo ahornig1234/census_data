@@ -4,13 +4,13 @@ app = Flask(__name__)
 
 @app.route('/')
 def homepage():
-    the_time = datetime.now().strftime("%A, %d %b %Y %l:%M %p")
+#    the_time = datetime.now().strftime("%A, %d %b %Y %l:%M %p")
 
     return """
     <h1>Hello heroku</h1>
     <p>It is currently {time}.</p>
 
-    <img src="fig.pdf">
+    <img src="/Users/ahornig/Documents/Research/Programs/github/census_data/fig.pdf">
     """.format(time=the_time)
 
 if __name__ == '__main__':
