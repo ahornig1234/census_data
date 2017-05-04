@@ -1,5 +1,5 @@
 import csv
-import plotly
+#import plotly
 import matplotlib.pyplot as plt
 import numpy
 
@@ -127,7 +127,9 @@ with open('ss15pnm.csv', 'rb') as csvfile:
 #plt.plot(figC, filename='aid_vs_rentfrac')
 
 plt.plot([7,4,3], [6,2,1])
-plt.show()
+#plt.show()
+fig = plt.figure()
+fig.savefig('fig1.pdf', bbox_inches='tight')
 
 
 
@@ -147,149 +149,149 @@ plt.show()
 
 #~~~~~~~~~~~plotly plots~~~~~~~~~~~~~
 
-trace1 = plotly.graph_objs.Scatter(
-  x = incs1, y = rentfracs, mode = 'markers',
-  marker = dict(symbol = 'circle',
-    size = 4,
-    color = 'rgba(152, 0, 0, 1)'),
-    name = 'Rent Fraction',
-    line = dict(width = 2, color = 'rgb(0, 0, 0)')
-)
-
-trace2 = plotly.graph_objs.Scatter(
-  x = incs2, y = mortfracs, mode = 'markers',
-  marker = dict(symbol = 'x',
-    size = 4,
-    color = 'rgba(0, 165, 40, 0.4)'),
-    name = 'Mortgage Fraction',
-    line = dict(width = 2, color = 'rgb(0, 0, 0)')
-)
-
-trace3 = plotly.graph_objs.Scatter(
-  x = incs1, y = rents, mode = 'markers',
-  marker = dict(symbol = 'circle',
-    size = 4,
-    color = 'rgba(152, 0, 0, 1)'),
-    name = 'Rent Fraction',
-    line = dict(width = 2,color = 'rgb(0, 0, 0)')
-)
-
-trace4 = plotly.graph_objs.Scatter(
-  x = incs2,y = morts, mode = 'markers',
-  marker = dict(symbol = 'x',
-    size = 4,
-    color = 'rgba(0, 165, 40, 0.4)'),
-    name = 'Mortgage Fraction',
-    line = dict(width = 2,color = 'rgb(0, 0, 0)')
-)
-
-layout1 = plotly.graph_objs.Layout(
-  #title= 'title of plot1'
-  xaxis=dict(
-      range = [0,300000],
-      title='Salary',
-      titlefont=dict(
-          family='Arial, sans-serif',
-          size=18,
-          color='black'
-      ),
-      showticklabels=True,
-      tickangle=45,
-      tickfont=dict(
-          family='Old Standard TT, serif',
-          size=14,
-          color='black'
-      ),
-    
-  ),
-  yaxis=dict(
-      title='Monthly Payment/Salary Percentage',
-      titlefont=dict(
-          family='Arial, sans-serif',
-          size=18,
-          color='black'
-      ),
-      showticklabels=True,
-      tickangle=45,
-      tickfont=dict(
-          family='Old Standard TT, serif',
-          size=14,
-          color='black'
-      ),
-      showexponent='All'
-  )
-)
-
-
-layout2 = plotly.graph_objs.Layout(
-  #title= 'title of plot2'
-  xaxis=dict(
-      range = [0,300000],
-      title='Salary',
-      titlefont=dict(
-          family='Arial, sans-serif',
-          size=18,
-          color='black'
-      ),
-      showticklabels=True,
-      tickangle=45,
-      tickfont=dict(
-          family='Old Standard TT, serif',
-          size=14,
-          color='black'
-      ),
-    
-  ),
-  yaxis=dict(
-      title='Total Monthly Payment',
-      titlefont=dict(
-          family='Arial, sans-serif',
-          size=18,
-          color='black'
-      ),
-      showticklabels=True,
-      tickangle=45,
-      tickfont=dict(
-          family='Old Standard TT, serif',
-          size=14,
-          color='black'
-      ),
-      showexponent='All'
-  )
-)
-
-alloffmed_rentfracs = 0
-oneonemed_rentfracs = 0
-allonmed_rentfracs = 0
-
-inc = 1.0/float(len(IDmeddata))
-for el in IDmeddata:
-  alloffmed = all(t==2 for t in IDmeddata[el][1]) #all off medicaid
-  allonmed = all(t==1 for t in IDmeddata[el][1]) #all on medicaid
-  if alloffmed: alloffmed_rentfracs += inc*IDmeddata[el][0]
-  else: oneonemed_rentfracs += inc*IDmeddata[el][0]
-  if allonmed: allonmed_rentfracs += inc*IDmeddata[el][0]
-
-traceC = plotly.graph_objs.Bar(x = ['No household aid', 'At least one member on aid', 'All members on aid'], y = [alloffmed_rentfracs, oneonemed_rentfracs, allonmed_rentfracs], marker = dict(color = ['rgba(222,45,38,0.8)','rgba(0,122,240,0.8)','rgba(40,100,12,0.8)']))
-
-layoutC = plotly.graph_objs.Layout(
-    #title='Government-assistance vs. rent/salary ratio',
-    yaxis=dict(
-        title='Percent of Rent to Salary',
-        titlefont=dict(
-            size=16,
-            color='rgb(107, 107, 107)'
-        ),
-        tickfont=dict(
-            size=14,
-            color='rgb(107, 107, 107)'
-        )
-    )
-)
-
-figA = plotly.graph_objs.Figure(data = [trace1, trace2], layout=layout1)
-figB = plotly.graph_objs.Figure(data = [trace3, trace4], layout=layout2)
-figC = plotly.graph_objs.Figure(data = [traceC], layout = layoutC)
+#trace1 = plotly.graph_objs.Scatter(
+#  x = incs1, y = rentfracs, mode = 'markers',
+#  marker = dict(symbol = 'circle',
+#    size = 4,
+#    color = 'rgba(152, 0, 0, 1)'),
+#    name = 'Rent Fraction',
+#    line = dict(width = 2, color = 'rgb(0, 0, 0)')
+#)
+#
+#trace2 = plotly.graph_objs.Scatter(
+#  x = incs2, y = mortfracs, mode = 'markers',
+#  marker = dict(symbol = 'x',
+#    size = 4,
+#    color = 'rgba(0, 165, 40, 0.4)'),
+#    name = 'Mortgage Fraction',
+#    line = dict(width = 2, color = 'rgb(0, 0, 0)')
+#)
+#
+#trace3 = plotly.graph_objs.Scatter(
+#  x = incs1, y = rents, mode = 'markers',
+#  marker = dict(symbol = 'circle',
+#    size = 4,
+#    color = 'rgba(152, 0, 0, 1)'),
+#    name = 'Rent Fraction',
+#    line = dict(width = 2,color = 'rgb(0, 0, 0)')
+#)
+#
+#trace4 = plotly.graph_objs.Scatter(
+#  x = incs2,y = morts, mode = 'markers',
+#  marker = dict(symbol = 'x',
+#    size = 4,
+#    color = 'rgba(0, 165, 40, 0.4)'),
+#    name = 'Mortgage Fraction',
+#    line = dict(width = 2,color = 'rgb(0, 0, 0)')
+#)
+#
+#layout1 = plotly.graph_objs.Layout(
+#  #title= 'title of plot1'
+#  xaxis=dict(
+#      range = [0,300000],
+#      title='Salary',
+#      titlefont=dict(
+#          family='Arial, sans-serif',
+#          size=18,
+#          color='black'
+#      ),
+#      showticklabels=True,
+#      tickangle=45,
+#      tickfont=dict(
+#          family='Old Standard TT, serif',
+#          size=14,
+#          color='black'
+#      ),
+#    
+#  ),
+#  yaxis=dict(
+#      title='Monthly Payment/Salary Percentage',
+#      titlefont=dict(
+#          family='Arial, sans-serif',
+#          size=18,
+#          color='black'
+#      ),
+#      showticklabels=True,
+#      tickangle=45,
+#      tickfont=dict(
+#          family='Old Standard TT, serif',
+#          size=14,
+#          color='black'
+#      ),
+#      showexponent='All'
+#  )
+#)
+#
+#
+#layout2 = plotly.graph_objs.Layout(
+#  #title= 'title of plot2'
+#  xaxis=dict(
+#      range = [0,300000],
+#      title='Salary',
+#      titlefont=dict(
+#          family='Arial, sans-serif',
+#          size=18,
+#          color='black'
+#      ),
+#      showticklabels=True,
+#      tickangle=45,
+#      tickfont=dict(
+#          family='Old Standard TT, serif',
+#          size=14,
+#          color='black'
+#      ),
+#    
+#  ),
+#  yaxis=dict(
+#      title='Total Monthly Payment',
+#      titlefont=dict(
+#          family='Arial, sans-serif',
+#          size=18,
+#          color='black'
+#      ),
+#      showticklabels=True,
+#      tickangle=45,
+#      tickfont=dict(
+#          family='Old Standard TT, serif',
+#          size=14,
+#          color='black'
+#      ),
+#      showexponent='All'
+#  )
+#)
+#
+#alloffmed_rentfracs = 0
+#oneonemed_rentfracs = 0
+#allonmed_rentfracs = 0
+#
+#inc = 1.0/float(len(IDmeddata))
+#for el in IDmeddata:
+#  alloffmed = all(t==2 for t in IDmeddata[el][1]) #all off medicaid
+#  allonmed = all(t==1 for t in IDmeddata[el][1]) #all on medicaid
+#  if alloffmed: alloffmed_rentfracs += inc*IDmeddata[el][0]
+#  else: oneonemed_rentfracs += inc*IDmeddata[el][0]
+#  if allonmed: allonmed_rentfracs += inc*IDmeddata[el][0]
+#
+#traceC = plotly.graph_objs.Bar(x = ['No household aid', 'At least one member on aid', 'All members on aid'], y = [alloffmed_rentfracs, oneonemed_rentfracs, allonmed_rentfracs], marker = dict(color = ['rgba(222,45,38,0.8)','rgba(0,122,240,0.8)','rgba(40,100,12,0.8)']))
+#
+#layoutC = plotly.graph_objs.Layout(
+#    #title='Government-assistance vs. rent/salary ratio',
+#    yaxis=dict(
+#        title='Percent of Rent to Salary',
+#        titlefont=dict(
+#            size=16,
+#            color='rgb(107, 107, 107)'
+#        ),
+#        tickfont=dict(
+#            size=14,
+#            color='rgb(107, 107, 107)'
+#        )
+#    )
+#)
+#
+#figA = plotly.graph_objs.Figure(data = [trace1, trace2], layout=layout1)
+#figB = plotly.graph_objs.Figure(data = [trace3, trace4], layout=layout2)
+#figC = plotly.graph_objs.Figure(data = [traceC], layout = layoutC)
 
 #plotly.tools.set_credentials_file(username='andrew.hornig', api_key='2rmy1ANWqVZHMQAkip7Y')
 #plotly.plotly.iplot(figA, filename='fracsplot.html')
