@@ -10,7 +10,7 @@ def homepage():
     <h1>Hello heroku</h1>
     <p>It is currently {time}.</p>
 
-    <img src="file:///Users/ahornig/Documents/Research/Programs/github/census_data/fracsplot.html">
+    <img src="/fig.pdf">
     """.format(time=the_time)
 
 
