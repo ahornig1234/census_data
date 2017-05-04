@@ -7,10 +7,9 @@ def homepage():
     the_time = datetime.now().strftime("%A, %d %b %Y %l:%M %p")
 
     return """
-    <h1>Hello heroku</h1>
-    <p>It is currently {time}.</p>
+    <h1>This is my census data analysisasys</h1>
 
-    <img src="/fig.pdf">
+    <img src="/fig.pdf" />
     """.format(time=the_time)
 
 
