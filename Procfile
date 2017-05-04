@@ -1,1 +1,1 @@
-web: gunicorn census_data.py:app
+web: gunicorn census_data:app
