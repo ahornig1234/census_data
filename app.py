@@ -8,11 +8,13 @@ def homepage():
 
     return """
     <h1>This is my census data analysis</h1>
-
-    <img src="http://drive.google.com/file/d/0B2h-M49bJOxNRlcwa21FOWlDQ0U/view?usp=sharing" />
+    
+    
+    <img src="google.com" />
     """.format(time=the_time)
 
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
 
+#<img src="http://drive.google.com/file/d/0B2h-M49bJOxNRlcwa21FOWlDQ0U/view?usp=sharing" />
