@@ -1,5 +1,5 @@
-import csv, matplotlib.pyplot as plt, plotly
-#import numpy
+import csv, plotly
+#import matplotlib.pyplot as plt, numpy
 
 import zipfile
 zip_ref = zipfile.ZipFile('data.zip', 'r')
