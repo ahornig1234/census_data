@@ -7,9 +7,9 @@ def homepage():
     the_time = datetime.now().strftime("%A, %d %b %Y %l:%M %p")
 
     return """
-    <h1>This is my census data analysisasys</h1>
+    <h1>This is my census data analysis</h1>
 
-    <img src="/fig.pdf" />
+    <img src="https://drive.google.com/file/d/0B2h-M49bJOxNRlcwa21FOWlDQ0U/view?usp=sharing" />
     """.format(time=the_time)
 
 
