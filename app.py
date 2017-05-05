@@ -17,8 +17,8 @@ def homepage():
     <p>Here is a pdf file from the analysis, hosted from google drive:</p>
     <iframe src="https://drive.google.com/file/d/0B2h-M49bJOxNUlVnR29tQzhLVWc/preview" width="600" height="400"></iframe>
 
-    <p> Does this work too?? </p>
-    <iframe width="900" height="800" frameborder="0" scrolling="no" src="//plot.ly/~andrew.hornig/8.embed"></iframe>
+    <p>Here is a pdf file from the analysis, hosted from plot.ly:</p>
+    <iframe width="450" height="400" frameborder="0" scrolling="no" src="//plot.ly/~andrew.hornig/8.embed"></iframe>
     
     """.format(time=the_time)
 
