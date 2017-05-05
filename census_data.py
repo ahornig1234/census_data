@@ -128,9 +128,10 @@ with open('ss15pnm.csv', 'rb') as csvfile:
 #plt.plot(figC, filename='aid_vs_rentfrac')
 
 plt.plot([7,4,3], [6,2,1])
-plt.show()
+#plt.show()
 #fig = plt.figure()
-#plt.savefig('fig.pdf', bbox_inches='tight')
+plt.savefig('fig.pdf', bbox_inches='tight')
+plt.savefig('fig.jpg', bbox_inches='tight')
 plt.close()
 
 
