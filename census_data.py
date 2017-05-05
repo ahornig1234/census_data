@@ -128,12 +128,14 @@ def makeplots():
   #plt.plot(figB, filename='valuesplot')
   #plt.plot(figC, filename='aid_vs_rentfrac')
 
-  plt.plot([7,4,3], [6,2,1])
+#  plt.plot([7,4,3], [6,2,1])
+
   #plt.show()
   #fig = plt.figure()
-  plt.savefig('fig.pdf', bbox_inches='tight')
-  plt.savefig('fig.jpg', bbox_inches='tight')
-  plt.close()
+
+#  plt.savefig('fig.pdf', bbox_inches='tight')
+#  plt.savefig('fig.jpg', bbox_inches='tight')
+#  plt.close()
 
 
   #~~~~~~~~~~~plotly plots~~~~~~~~~~~~~
