@@ -13,7 +13,7 @@ def homepage():
     <img src="http://loremflickr.com/600/400" />
     
     <p>Here is a pdf file from the analysis, hosted from google drive:</p>
-    <iframe src="https://drive.google.com/file/d/0B2h-M49bJOxNUlVnR29tQzhLVWc/preview" width="640" height="480"></iframe>
+    <iframe src="https://drive.google.com/file/d/0B2h-M49bJOxNUlVnR29tQzhLVWc/preview" width="600" height="400"></iframe>
 
     """.format(time=the_time)
 

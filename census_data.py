@@ -174,7 +174,7 @@ plt.close()
 #  marker = dict(symbol = 'circle',
 #    size = 4,
 #    color = 'rgba(152, 0, 0, 1)'),
-#    name = 'Rent Fraction',
+#    name = 'Rent',
 #    line = dict(width = 2,color = 'rgb(0, 0, 0)')
 #)
 #
@@ -183,7 +183,7 @@ plt.close()
 #  marker = dict(symbol = 'x',
 #    size = 4,
 #    color = 'rgba(0, 165, 40, 0.4)'),
-#    name = 'Mortgage Fraction',
+#    name = 'Mortgage',
 #    line = dict(width = 2,color = 'rgb(0, 0, 0)')
 #)
 #
