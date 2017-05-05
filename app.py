@@ -2,6 +2,8 @@ from flask import Flask
 from datetime import datetime
 app = Flask(__name__)
 
+import census_data
+
 @app.route('/')
 def homepage():
     the_time = datetime.now().strftime("%A, %d %b %Y %l:%M %p")
@@ -15,10 +17,10 @@ def homepage():
     <p>Here is a pdf file from the analysis, hosted from google drive:</p>
     <iframe src="https://drive.google.com/file/d/0B2h-M49bJOxNUlVnR29tQzhLVWc/preview" width="600" height="400"></iframe>
 
+
     """.format(time=the_time)
 
+    census_data.makeplots()
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
-
-#<img src="http://drive.google.com/file/d/0B2h-M49bJOxNRlcwa21FOWlDQ0U/view?usp=sharing" />
