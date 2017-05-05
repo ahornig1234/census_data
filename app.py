@@ -10,7 +10,9 @@ def homepage():
     <h1>This is my census data analysis</h1>
     
     
-    <img src="http://google.com" />
+#    <img src="http://google.com" />
+    <img src="http://loremflickr.com/600/400 />
+
     """.format(time=the_time)
 
 
