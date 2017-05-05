@@ -18,7 +18,7 @@ def homepage():
     <iframe src="https://drive.google.com/file/d/0B2h-M49bJOxNUlVnR29tQzhLVWc/preview" width="600" height="400"></iframe>
 
     <p> Does this work too?? </p>
-    <img src= "fig.jpg" />
+    <img src= "./fig.jpg" />
     
     """.format(time=the_time)
 
