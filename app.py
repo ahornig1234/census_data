@@ -9,8 +9,11 @@ def homepage():
     return """
     <h1>This is my census data analysis</h1>
     
+    <p>Here is a random cat:</p>
     <img src="http://loremflickr.com/600/400" />
-    <img src="file:///Users/ahornig/Documents/Research/Programs/github/census_data" />
+    
+    <p>Here is a pdf file from the analysis, hosted from google drive:</p>
+    <iframe src="https://drive.google.com/file/d/0B2h-M49bJOxNUlVnR29tQzhLVWc/preview" width="640" height="480"></iframe>
 
     """.format(time=the_time)
 
