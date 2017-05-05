@@ -1,5 +1,5 @@
 import csv
-import plotly
+#import plotly
 import matplotlib.pyplot as plt
 import numpy
 #import Tkinter
