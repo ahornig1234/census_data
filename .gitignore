@@ -1,3 +1,3 @@
 fig.*
 *.csv
-requirement-extra.txt
+requirements-*.txt
