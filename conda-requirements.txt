@@ -1,6 +1,6 @@
 nomkl
 scipy
 numpy
-#scikit-learn
+scikit-learn
 pandas
 bokeh
