@@ -52,4 +52,11 @@ web: gunicorn gettingstarted.wsgi --log-file -\
 git commit -m \'93after purging heroku, adding back in scikit-learn and reverting to gunicorn 17.5 since it doesn\'92t run after successful deployment\'94\
 \
 \
+scipy #=0.19.0-np111py27_nomkl_0\
+numpy #=m1.11.3-py27_nomkl_0\
+scikit-learn #=0.18.1-np111py27_nomkl_1\
+\
+cleaned up conda since numpy still not recognized, removed scikit-learn for now (it was 299M out of 300M anyways)\
+\
+\
 }
