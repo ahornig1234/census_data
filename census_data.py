@@ -1,10 +1,13 @@
-import numpy, matplotlib.pyplot as plt, plotly, scipy, pandas, scikit-learn
+import numpy, matplotlib.pyplot as plt, plotly, scipy, pandas
 import os, csv
 
 s = pandas.Series([1, 2, 3])
 print s.describe()
 
-
+#import sklearn
+#from sklearn import datasets
+#digits = datasets.load_digits()
+#print digits.data
 
 if not os.path.isfile('ss15pnm.csv') or not os.path.isfile('ss15hnm.csv'):
   import zipfile

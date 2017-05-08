@@ -170,7 +170,7 @@ try to add sklearn==0.18.1 to requirements.txt
 add “import sklearn: and add simple sklearn function
 ->now  313.9M, worked!!!
 
-removed scikit-learn, can add later (works locally)
+removed scikit-learn (“import sklearn”), can add later (works locally), added commented out test of it
 
 
 
@@ -179,5 +179,4 @@ removed scikit-learn, can add later (works locally)
 
 
 
-can: 
-	trying to use matplotlib=2.0.0
+can also: try to use matplotlib=2.0.0 (bigger/smaller? opinions online??)
