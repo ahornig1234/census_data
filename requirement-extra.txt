@@ -167,7 +167,10 @@ adding “import pandas” and using simply function to census_data.py
 try to add sklearn==0.18.1 to requirements.txt
 ->
 
-next: add “import sklearn: and add simple sklearn function
+add “import sklearn: and add simple sklearn function
+->now  313.9M, worked!!!
+
+removed scikit-learn, now just trying to re-cache heroku
 
 
 
