@@ -1,6 +1,8 @@
 import numpy, matplotlib.pyplot as plt, plotly, scipy
 import os, csv
 
+print scipy.pi
+
 if not os.path.isfile('ss15pnm.csv') or not os.path.isfile('ss15hnm.csv'):
   import zipfile
   zip_ref = zipfile.ZipFile('data.zip', 'r')
