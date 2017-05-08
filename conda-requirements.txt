@@ -1,5 +1,5 @@
 nomkl
-scipy=0.18.1=np111py27_0_nomkl_0
+scipy=0.18.1=py27_0_nomkl_0
 numpy=1.11.2=py27_0_nomkl_0
 pandas
 bokeh
