@@ -1,5 +1,5 @@
 nomkl
 scipy=0.18.1 --no-deps
 numpy=1.11.2 --no-deps
-pandas --no-deps
+pandas
 bokeh
