@@ -1,5 +1,7 @@
+nomkl
+
 dill==0.2.1
-Flask==0.10.1
+Flask==0.12
 gunicorn==17.5
 Jinja2==2.7.2
 oauth==1.0.1
@@ -12,3 +14,6 @@ matplotlib==1.1.0
 scipy==0.11.0
 scikit-learn==0.13.1
 plotly==1.8.6
+
+pandas==0.19.2
+bokeh==0.12.5
