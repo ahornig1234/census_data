@@ -1,21 +1,18 @@
-import csv
-import plotly
-import matplotlib.pyplot as plt
-import numpy
-#import Tkinter
+import numpy, matplotlib.pyplot as plt, plotly
+import os, csv
 
-import zipfile
-zip_ref = zipfile.ZipFile('data.zip', 'r')
-zip_ref.extractall()
-zip_ref.close()
-
+if not os.path.isfile('ss15pnm.csv') or not os.path.isfile('ss15hnm.csv'):
+  import zipfile
+  zip_ref = zipfile.ZipFile('data.zip', 'r')
+  zip_ref.extractall()
+  zip_ref.close()
 
 #~~~~~~~~~~~~HOUSING DATA~~~~~~~~~~~~~~~~
 
-IDmeddata = {}
-IDyearrentdata = {}
-
 def makeplots():
+  IDmeddata = {}
+  IDyearrentdata = {}
+  
   with open('ss15hnm.csv', 'rb') as csvfile:
     reader = csv.reader(csvfile)
     
