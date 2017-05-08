@@ -164,9 +164,10 @@ try to add pandas to requirements.txt
 adding “import pandas” and using simply function to census_data.py
 -> now 277.5M, it worked!!
 
-try to add sklearn to requirements.text
+try to add sklearn==0.18.1 to requirements.txt
 ->
 
+next: add “import sklearn: and add simple sklearn function
 
 
 
