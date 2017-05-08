@@ -1,4 +1,4 @@
-import numpy, matplotlib.pyplot as plt, plotly
+import numpy, matplotlib.pyplot as plt, plotly, scipy
 import os, csv
 
 if not os.path.isfile('ss15pnm.csv') or not os.path.isfile('ss15hnm.csv'):
