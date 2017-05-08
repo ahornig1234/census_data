@@ -170,7 +170,7 @@ try to add sklearn==0.18.1 to requirements.txt
 add “import sklearn: and add simple sklearn function
 ->now  313.9M, worked!!!
 
-removed scikit-learn, now just trying to re-cache heroku
+removed scikit-learn, can add later (works locally)
 
 
 

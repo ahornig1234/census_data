@@ -1,8 +1,10 @@
-import numpy, matplotlib.pyplot as plt, plotly, scipy, pandas
+import numpy, matplotlib.pyplot as plt, plotly, scipy, pandas, scikit-learn
 import os, csv
 
 s = pandas.Series([1, 2, 3])
 print s.describe()
+
+
 
 if not os.path.isfile('ss15pnm.csv') or not os.path.isfile('ss15hnm.csv'):
   import zipfile
