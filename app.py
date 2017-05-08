@@ -25,10 +25,7 @@ def homepage():
     census_data.makeplots()
 
 if __name__ == "__main__":
-<<<<<<< HEAD
 #    app.run(debug=True)
     app.run(debug=True, use_reloader=True)
-=======
-    app.run(port=33507, debug=True, use_reloader=True) #port 33507 is reserved for Flask
->>>>>>> origin
+#    app.run(port=33507, debug=True, use_reloader=True) #port 33507 is reserved for Flask
 
