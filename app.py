@@ -1,10 +1,10 @@
 from flask import Flask, render_template, request, redirect
-app = Flask(__name__)
+myapp = Flask(__name__)
 
 import census_data
 
 from datetime import datetime
-@app.route('/')
+@myapp.route('/')
 def homepage():
     the_time = datetime.now().strftime("%A, %d %b %Y %l:%M %p")
 
@@ -25,5 +25,6 @@ def homepage():
     census_data.makeplots()
 
 if __name__ == "__main__":
-    app.run(debug=True, use_reloader=True)
+#    myapp.run(debug=True)
+    myapp.run(debug=True, use_reloader=True)
 
