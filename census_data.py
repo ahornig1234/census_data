@@ -1,7 +1,7 @@
 import numpy, matplotlib.pyplot as plt, plotly, scipy, pandas
 import os, csv
 
-s = pd.Series([1, 2, 3])
+s = pandas.Series([1, 2, 3])
 print s.describe()
 
 if not os.path.isfile('ss15pnm.csv') or not os.path.isfile('ss15hnm.csv'):
