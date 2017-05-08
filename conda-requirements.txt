@@ -1,3 +1,4 @@
+--no-deps
 nomkl
 scipy=0.18.1=py27_0_nomkl_0
 numpy=1.11.2=py27_0_nomkl_0
