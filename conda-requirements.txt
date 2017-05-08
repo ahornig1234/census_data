@@ -1,4 +1,4 @@
-normal
+nomkl
 scipy
 numpy
 pandas

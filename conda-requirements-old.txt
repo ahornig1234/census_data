@@ -1,5 +1,0 @@
-nomkl
-numpy
-matplotlib
-scipy
-scikit-learn
