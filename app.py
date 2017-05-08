@@ -1,11 +1,6 @@
 from flask import Flask, render_template, request, redirect
 myapp = Flask(__name__)
 
-
-if __name__ == "__main__":
-#    myapp.run(debug=True)
-    myapp.run(debug=True, use_reloader=True)
-
 import census_data
 
 from datetime import datetime
@@ -28,3 +23,8 @@ def homepage():
     """.format(time=the_time)
 
     census_data.makeplots()
+
+if __name__ == "__main__":
+#    myapp.run(debug=True)
+    myapp.run(debug=True, use_reloader=True)
+
