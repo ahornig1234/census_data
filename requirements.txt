@@ -1,10 +1,9 @@
-setuptools==0.7.3
-##THIS WAS CREATED USING ‘condo list -e'
+#THIS WAS CREATED USING ‘condo list -e'
 
 # This file may be used to create an environment using:
 # $ conda create --name <env> --file <this file>
 # platform: osx-64
-#_license=1.1=py27_1
+# _license=1.1=py27_1
 alabaster=0.7.9=py27_0
 anaconda=4.3.1=np111py27_0
 anaconda-client=1.6.0=py27_0
@@ -164,6 +163,7 @@ scikit-learn=0.18.1=np111py27_1
 scipy=0.18.1=np111py27_1
 seaborn=0.7.1=py27_0
 #setuptools=27.2.0=py27_0 #REMOVED!!!!!!!
+setuptools==0.7.3
 simplegeneric=0.8.1=py27_1
 singledispatch=3.4.0.3=py27_0
 sip=4.18=py27_0
