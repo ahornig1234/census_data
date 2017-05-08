@@ -1,6 +1,6 @@
 nomkl
-scipy=0.19.0  #-np111py27_nomkl_0
-numpy=1.11.3-py27_nomkl_0
-scikit-learn=0.18.1-np111py27_nomkl_1
+scipy=0.19.0 #-np111py27_nomkl_0
+numpy=1.11.3 #-py27_nomkl_0
+#scikit-learn=0.18.1-np111py27_nomkl_1
 pandas
 bokeh
