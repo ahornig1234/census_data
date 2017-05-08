@@ -1,3 +1,4 @@
+nomkl
 Flask==0.12
 gunicorn==17.5
 numpy==1.12.1
