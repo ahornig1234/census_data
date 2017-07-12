@@ -11,8 +11,8 @@
   * psql -h <host> -p <port> -U <username> -W <password> <database>
 * Here: 
   * \<port\>=5432 
-  * <database>=census_data
-  * <host>=localhost
+  * \<database\>=census_data
+  * \<host\>=localhost
   * See http://zetcode.com/db/postgresqlpythontutorial/ for more info.
                   
             
