@@ -14,12 +14,12 @@ The files in data_documentation/ describe the variables in the data sets.
 
 Several helper functions for the data. Can be run on it's own or imported.
 
-** extractfilesfromzip(filenames, path, zipname): **
+**extractfilesfromzip(filenames, path, zipname):**
 
 Files are extracted from data_files.zip file, which contains the housing and personal csv files mentioned above.
                   
 
-** data-to-postgres(tables): **
+**data-to-postgres(tables):**
 
 The data is taken from csv files and hosted as TABLEs on the PostgreSQL server which can be linked to remotely with one of the commands:
   * psql -h \<host\> -p \<port\> -u \<database\>
