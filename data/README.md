@@ -21,7 +21,6 @@ Files are extracted from data_files.zip file, which contains the housing and per
 
 
 **data-to-postgres(tables):**
-
 The data is taken from csv files and hosted as TABLEs on the PostgreSQL server which can be linked to remotely with one of the commands:
   * psql -h \<host\> -p \<port\> -u \<database\>
   * psql -h \<host\> -p \<port\> -U \<username\> -W \<password\> \<database\>
