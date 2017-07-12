@@ -1,40 +1,17 @@
 import numpy, matplotlib.pyplot as plt, plotly, scipy, pandas
-import os, csv
+import os
+import sys
+
+#import csv
+
+sys.path.append(os.getcwd() + '/data')
+from data_functions import extractfilesfromzip
+
 
 import numpy as np
 import pandas as pd
-
 #import sklearn
-#from sklearn import datasets
-#digits = datasets.load_digits()
-#print digits.data
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-def extractfilesfromzip(filenames, path, zipname):
-  '''extrac files from a zip file if they are not already'''
-  
-  for filename in filenames:
-  
-    absname = path + filename
-    if not os.path.isfile(absname):
-      
-      import zipfile
-      zip_ref = zipfile.ZipFile(zipname, 'r')
-      
-      #make sure file exists in zip file,
-      #  otherwise output to terminal and move to next file
-      try:
-        zip_ref.extract(filename, path)
-        print 'extracting ' + absname
-      
-#      except:
-      except KeyError:
-        print 'File ' + absname + ' is not in ' + zipname
-      
-      finally:
-        zip_ref.close()
-  
-    else: print 'found ' + absname
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def create_housing_columns():
@@ -135,8 +112,8 @@ def create_person_columns():
 def main():
 
   #get ziped csv files if needed
-  datafiles = {'housing data':'ss15hnm.csv',
-               'person data':'ss15pnm.csv'}
+  datafiles = {'housing':'ss15hnm.csv',
+               'personal':'ss15pnm.csv'}
   datapath = 'data/data_files/'
   zipname = 'data/data_files.zip'
   
@@ -146,7 +123,7 @@ def main():
 
   #create pandas dataframe with relevant info
   housing_columns = create_housing_columns()
-  db_housing = pd.read_csv(datapath+datafiles['housing data'],
+  db_housing = pd.read_csv(datapath+datafiles['housing'],
                            usecols=housing_columns)
 
   #Adjust housing for inflation rounded up to nearest $,
@@ -171,7 +148,7 @@ def main():
 
   #create pandas dataframe with relevant info
   person_columns = create_person_columns()
-  db_person = pd.read_csv(datapath+datafiles['person data'],
+  db_person = pd.read_csv(datapath+datafiles['personal'],
                            usecols=person_columns)
                            
                            

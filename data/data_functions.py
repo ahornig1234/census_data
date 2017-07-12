@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-# this file adds a database to the census_data
+# functions for manipulating data files
 
 import sys, os
 import psycopg2
@@ -9,9 +9,37 @@ import csv
 
 con = None
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def extractfilesfromzip(filenames, path, zipname):
+  '''extract files from a zip file if they are not already'''
+  
+  for filename in filenames:
+  
+    absname = path + filename
+    if not os.path.isfile(absname):
+      
+      import zipfile
+      zip_ref = zipfile.ZipFile(zipname, 'r')
+      
+      #make sure file exists in zip file,
+      #  otherwise output to terminal and move to next file
+      try:
+        zip_ref.extract(filename, path)
+        print 'extracting ' + absname
+      
+      except KeyError:
+        print 'File ' + absname + ' is not in ' + zipname
+      
+      finally:
+        zip_ref.close()
+  
+    else: print 'found ' + absname
 
-#--------UPLOADS CSV FILE TO POSTGRESQL-------------------------------------------------
-def create_table(tables):
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def datatoPostgres(tables):
+
+  con=[]
   try:
      
     con = psycopg2.connect("dbname='census_data' user='ahornig'")
@@ -28,23 +56,12 @@ def create_table(tables):
       cur.execute("DROP TABLE IF EXISTS %s" % table)
       with open(tables[table], 'rb') as csvfile:
         
-        #all rows are returned as lists of strings
-
-#          #~~~~~~~~~~CREATE TABLE USING PANDAS~~~~~~~~~~
-#          # (slow, but finds data types for you)
-#          # CURRENTLY NOT WORKING!!!
-#          import pandas as pd
-#          from sqlalchemy import create_engine
-#          df = pd.read_csv('ss15hnm.csv')
-#          df.columns = [c.lower() for c in df.columns]
-#          engine = create_engine('postgresql://ahornig@localhost:5432/census_data' ,echo=True)
-#          df.to_sql("%s" % table, engine, if_exists="replace") #options are ‘fail’,‘replace’,‘append’
 
         reader = csv.reader(csvfile)
         firstrow = next(reader)
 
         #~~~~~~~~~~CREATE TABLE USING CSV~~~~~~~~~~
-        # (fast, but makes all columns same data type)
+        # makes all columns same data type
 
         #create a TABLE from columns in firstrow, all of type datatype
         #firstrow is the labels for the columns
@@ -80,5 +97,11 @@ def create_table(tables):
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 if __name__ == "__main__":
-  tables = {'Housing':'ss15hnm.csv', 'Person':'ss15pnm.csv'}
-  create_table(tables)
+  
+  datafiles = {'housing':'ss15hnm.csv',
+               'personal':'ss15pnm.csv'}
+  datapath = 'data_files/'
+  zipname = 'data_files.zip'
+
+  extractfilesfromzip(datafiles.values(), datapath, zipname)
+  datatoPostgres(datafiles)
