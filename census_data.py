@@ -1,302 +1,226 @@
 import numpy, matplotlib.pyplot as plt, plotly, scipy, pandas
 import os, csv
 
-s = pandas.Series([1, 2, 3])
-print s.describe()
+import numpy as np
+import pandas as pd
 
 #import sklearn
 #from sklearn import datasets
 #digits = datasets.load_digits()
 #print digits.data
 
-if not os.path.isfile('ss15pnm.csv') or not os.path.isfile('ss15hnm.csv'):
-  import zipfile
-  zip_ref = zipfile.ZipFile('data.zip', 'r')
-  zip_ref.extractall()
-  zip_ref.close()
-
-#~~~~~~~~~~~~HOUSING DATA~~~~~~~~~~~~~~~~
-
-def makeplots():
-  IDmeddata = {}
-  IDyearrentdata = {}
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def extractfilesfromzip(filenames, path, zipname):
+  '''extrac files from a zip file if they are not already'''
   
-  with open('ss15hnm.csv', 'rb') as csvfile:
-    reader = csv.reader(csvfile)
-    
-    firstrow = next(reader)
-
-    serial_col = firstrow.index('SERIALNO')
-    incfm_col = firstrow.index('FINCP')
-    incfmflag_col = firstrow.index('FFINCP')
-    inchh_col = firstrow.index('HINCP')
-    inchhflag_col = firstrow.index('FHINCP')
-    rent_col = firstrow.index('GRNTP')
-    rentfrac_col = firstrow.index('GRPIP')
-    adjinc_col = firstrow.index('ADJINC')
-    mort_col = firstrow.index('MRGP')
-    
-    
-    incs1 = []
-    rents = []
-    rentfracs = []
-    
-    incs2 = []
-    morts = []
-    mortfracs = []
-    
-    for row in reader:
-      year = int(row[serial_col][:4])
-      try: # collect rent & income if both valid
-        infl_rate = float(row[adjinc_col])/1E6 #inflation adjust frac
-        
-        inc = float(row[inchh_col])
-        inc *= infl_rate
-        flag = int(row[inchhflag_col])
-        
-        rent = float(row[rent_col])
-        rent *= infl_rate
-        
-  #      rentfrac = float(row[rentfrac_col])
-        if inc>0: rentfrac = rent*12.0*100.0/inc #calculate instead of rentfrac_col !!
-        else: rentfrac = 101
-
-        #print row[incfmflag_col]
-        if rentfrac <=100 and flag==1 and rent < 2400: #numcaps at 101, 2400 (inf adjusted?)
-          incs1.append(inc)
-          rents.append(rent)
-          rentfracs.append(rentfrac)
-          ID = row[serial_col]
-          IDmeddata[ID] = [rentfrac, []]
-          if ID in IDyearrentdata:
-            IDyearrentdata[ID][0].append(year)
-          else: IDyearrentdata[ID] = [[year],[]]
+  for filename in filenames:
+  
+    absname = path + filename
+    if not os.path.isfile(absname):
       
-    
-      except: pass
-    
-      try: # collect mortgage & income if both valid
-        infl_rate = float(row[adjinc_col])/1E6 #inflation adjust frac
-        
-        inc = float(row[inchh_col])
-        inc *= infl_rate
-        flag = int(row[inchhflag_col])
-        
-        mort = float(row[mort_col])
-        mort *= infl_rate
-        
-        if inc>0:
-          mortfrac = mort*12.0*100.0/inc #not rentfrac_col !!
-          #print 'inc = ', inc
-          #print 'mort = ', mort
-          #print 'mortfrac = ', mortfrac
-        else: mortfrac = 101
-        
-        if mortfrac <= 100 and flag==1 and mort < 2400: # and flag==1
-          incs2.append(inc)
-          morts.append(mort)
-          mortfracs.append(mortfrac)
-          if not ID in IDyearrentdata: IDyearrentdata[ID] = ([],[year])
-          else: IDyearrentdata[ID][1].append(year)
-          
-      except: pass
-
-  #print IDyearrentdata
-  #~~~~~~~~~~~~PERSON DATA~~~~~~~~~~~~~~~~
-  ages = []
-  with open('ss15pnm.csv', 'rb') as csvfile:
-    reader = csv.reader(csvfile)
-    
-    firstrow = next(reader)
-    
-    serial_col = firstrow.index('SERIALNO')
-    asst_col = firstrow.index('HINS4')
-    age_col = firstrow.index('AGEP')
-    
-    
-    for row in reader:
+      import zipfile
+      zip_ref = zipfile.ZipFile(zipname, 'r')
+      
+      #make sure file exists in zip file,
+      #  otherwise output to terminal and move to next file
       try:
-        ID = row[serial_col]
-        if IDmeddata[ID]:
-          IDmeddata[ID][1].append(int(row[asst_col])) #add medicare if they have a rent/inc from housing data
-        
-        ages.append(int(row[age_col]))
-        #print 'age = ', row[age_col]
-      except: pass
-
-  #print ages
-  #for i in ages:
-  #  if i<10: print i
-
-  #~~~~~~~~~~~~PLOTS~~~~~~~~~~~~~~~~
-  #plt.plot(figA, filename='fracsplot')
-  #plt.plot(figB, filename='valuesplot')
-  #plt.plot(figC, filename='aid_vs_rentfrac')
-
-#  plt.plot([7,4,3], [6,2,1])
-
-  #plt.show()
-  #fig = plt.figure()
-
-#  plt.savefig('fig.pdf', bbox_inches='tight')
-#  plt.savefig('fig.jpg', bbox_inches='tight')
-#  plt.close()
-
-
-  #~~~~~~~~~~~plotly plots~~~~~~~~~~~~~
-
-  trace1 = plotly.graph_objs.Scatter(
-    x = incs1, y = rentfracs, mode = 'markers',
-    marker = dict(symbol = 'circle',
-      size = 4,
-      color = 'rgba(152, 0, 0, 1)'),
-      name = 'Rent Fraction',
-      line = dict(width = 2, color = 'rgb(0, 0, 0)')
-  )
-  
-  trace2 = plotly.graph_objs.Scatter(
-    x = incs2, y = mortfracs, mode = 'markers',
-    marker = dict(symbol = 'x',
-      size = 4,
-      color = 'rgba(0, 165, 40, 0.4)'),
-      name = 'Mortgage Fraction',
-      line = dict(width = 2, color = 'rgb(0, 0, 0)')
-  )
-  
-  trace3 = plotly.graph_objs.Scatter(
-    x = incs1, y = rents, mode = 'markers',
-    marker = dict(symbol = 'circle',
-      size = 4,
-      color = 'rgba(152, 0, 0, 1)'),
-      name = 'Rent',
-      line = dict(width = 2,color = 'rgb(0, 0, 0)')
-  )
-  
-  trace4 = plotly.graph_objs.Scatter(
-    x = incs2,y = morts, mode = 'markers',
-    marker = dict(symbol = 'x',
-      size = 4,
-      color = 'rgba(0, 165, 40, 0.4)'),
-      name = 'Mortgage',
-      line = dict(width = 2,color = 'rgb(0, 0, 0)')
-  )
-  
-  layout1 = plotly.graph_objs.Layout(
-    #title= 'title of plot1'
-    xaxis=dict(
-        range = [0,300000],
-        title='Salary',
-        titlefont=dict(
-            family='Arial, sans-serif',
-            size=18,
-            color='black'
-        ),
-        showticklabels=True,
-        tickangle=45,
-        tickfont=dict(
-            family='Old Standard TT, serif',
-            size=14,
-            color='black'
-        ),
+        zip_ref.extract(filename, path)
+        print 'extracting ' + absname
       
-    ),
-    yaxis=dict(
-        title='Monthly Payment/Salary Percentage',
-        titlefont=dict(
-            family='Arial, sans-serif',
-            size=18,
-            color='black'
-        ),
-        showticklabels=True,
-        tickangle=45,
-        tickfont=dict(
-            family='Old Standard TT, serif',
-            size=14,
-            color='black'
-        ),
-        showexponent='All'
-    )
-  )
-  
-  
-  layout2 = plotly.graph_objs.Layout(
-    #title= 'title of plot2'
-    xaxis=dict(
-        range = [0,300000],
-        title='Salary',
-        titlefont=dict(
-            family='Arial, sans-serif',
-            size=18,
-            color='black'
-        ),
-        showticklabels=True,
-        tickangle=45,
-        tickfont=dict(
-            family='Old Standard TT, serif',
-            size=14,
-            color='black'
-        ),
+#      except:
+      except KeyError:
+        print 'File ' + absname + ' is not in ' + zipname
       
-    ),
-    yaxis=dict(
-        title='Total Monthly Payment',
-        titlefont=dict(
-            family='Arial, sans-serif',
-            size=18,
-            color='black'
-        ),
-        showticklabels=True,
-        tickangle=45,
-        tickfont=dict(
-            family='Old Standard TT, serif',
-            size=14,
-            color='black'
-        ),
-        showexponent='All'
-    )
-  )
+      finally:
+        zip_ref.close()
   
-  alloffmed_rentfracs = 0
-  oneonemed_rentfracs = 0
-  allonmed_rentfracs = 0
-  
-  inc = 1.0/float(len(IDmeddata))
-  for el in IDmeddata:
-    alloffmed = all(t==2 for t in IDmeddata[el][1]) #all off medicaid
-    allonmed = all(t==1 for t in IDmeddata[el][1]) #all on medicaid
-    if alloffmed: alloffmed_rentfracs += inc*IDmeddata[el][0]
-    else: oneonemed_rentfracs += inc*IDmeddata[el][0]
-    if allonmed: allonmed_rentfracs += inc*IDmeddata[el][0]
-  
-  traceC = plotly.graph_objs.Bar(x = ['No household aid', 'At least one member on aid', 'All members on aid'], y = [alloffmed_rentfracs, oneonemed_rentfracs, allonmed_rentfracs], marker = dict(color = ['rgba(222,45,38,0.8)','rgba(0,122,240,0.8)','rgba(40,100,12,0.8)']))
-  
-  layoutC = plotly.graph_objs.Layout(
-      #title='Government-assistance vs. rent/salary ratio',
-      yaxis=dict(
-          title='Percent of Rent to Salary',
-          titlefont=dict(
-              size=16,
-              color='rgb(107, 107, 107)'
-          ),
-          tickfont=dict(
-              size=14,
-              color='rgb(107, 107, 107)'
-          )
-      )
-  )
-  
-  figA = plotly.graph_objs.Figure(data = [trace1, trace2], layout=layout1)
-  figB = plotly.graph_objs.Figure(data = [trace3, trace4], layout=layout2)
-  figC = plotly.graph_objs.Figure(data = [traceC], layout = layoutC)
-#
-#  plotly.tools.set_credentials_file(username='andrew.hornig', api_key='2rmy1ANWqVZHMQAkip7Y')
-#  plotly.plotly.iplot(figA, filename='fracsplot.html')
-#  plotly.plotly.iplot(figB, filename='valuesplot.html')
-#  plotly.plotly.iplot(figC, filename='aid_vs_rentfrac.html')
-#
-  plotly.offline.plot(figA, filename='fracsplot.html')
-  plotly.offline.plot(figB, filename='valuesplot.html')
-  plotly.offline.plot(figC, filename='aid_vs_rentfrac.html')
+    else: print 'found ' + absname
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def create_housing_columns():
+  '''decide which info goes into housing dataframe'''
+  
+  housing_columns = []
+
+  housing_columns.append('SERIALNO')
+  #  Housing unit/GQ person serial number (int)
+  #  2011000000001..2015999999999
+  
+  housing_columns.append('NP')
+  #  Number of person records following this housing record
+
+  housing_columns.append('FINCP')
+  #  Family income (past 12 months, + or - int)
+  #   MUCH MORE 0.0 entries THAN 'HINCP'
+  #   "A family consists of two or more people (one of whom is the householder) related by birth, marriage, or adoption residing in the same housing unit."
+
+  housing_columns.append('HINCP')
+  #  Household income (past 12 months, + or - int)
+
+  #housing_columns.append('RNTP')
+  #  Monthly Rent
+
+  housing_columns.append('GRNTP')
+  #  Gross rent = monthly rent + utilities
+  
+  housing_columns.append('FRNTP')
+  # Monthly rent allocation flag, 0=No 1 = Yes
+
+  #housing_columns.append('GRPIP')
+  #  Gross rent as a percentage of household income past 12 months
+  #  Is NaN when HINCP is 0 or negative
+  
+  housing_columns.append('MRGP')
+  #  1st mortgage payment, monthly amt (bbbbb=N/A, 00001..99999, char(5) in SQL)
+  #  '1st' just means not payment towards 2nd, 3rd, ... on that household
+
+  housing_columns.append('ADJHSG')
+  #  inflation-adjustment factor, *must*use on CONP,ELEP,FULP,GASP,GRNTP,INSP, MHP,MRGP,SMOCP,RNTP,SMP,WATP in housing record
+
+  housing_columns.append('ADJINC')
+  #  inflation-adjustment factor, *must*use on FINCP and HINCP in housing record,
+  #    and INTP,OIP,PAP,PERNP,PINCP,RETP,SEMP,SSIP,SSP,WAGP in person record'
+
+
+  return housing_columns
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def create_person_columns():
+  '''decide which info goes into person dataframe'''
+  
+  person_columns=[]
+  
+  person_columns.append('SERIALNO')
+#   Housing unit/GQ person serial number (int)
+#   2011000000001..2015999999999
+
+  #person_columns.append('PWGTP')
+#   Person's weight (WHAT UNITS??? - it seems really small)
+
+  person_columns.append('AGEP')
+#   Person's age
+
+  person_columns.append('FER')
+#   Gave birth to child within the past 12 months
+#        b .N/A (less than 15 years/greater than 50 years/male)
+#        1 .Yes
+#        2 .No
+#        8 .Suppressed for data year 2012 for selected PUMAs
+
+  person_columns.append('MAR')
+#   Marital status
+#        1 .Married
+#        2 .Widowed
+#        3 .Divorced
+#        4 .Separated
+#        5 .Never married or under 15 years old
+  person_columns.append('MARHM')
+#   Married in the past 12 months
+#        b .N/A (age less than 15 years; never married)
+#        1 .Yes
+#        2 .No
+  person_columns.append('ADJINC')
+  #  inflation-adjustment factor, *must*use on FINCP and HINCP in housing record,
+  #    and INTP,OIP,PAP,PERNP,PINCP,RETP,SEMP,SSIP,SSP,WAGP in person record'
+  
+  #person_columns.append('HINS4')
+#    Medicaid, Medical Assistance, or any kind of government-assistance plan
+#       for those with low incomes or a disability
+#    1 .Yes 2 .No
+
+  return person_columns
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def main():
+
+  #get ziped csv files if needed
+  datafiles = {'housing data':'ss15hnm.csv',
+               'person data':'ss15pnm.csv'}
+  datapath = 'data/data_files/'
+  zipname = 'data/data_files.zip'
+  
+  extractfilesfromzip(datafiles.values(), datapath, zipname)
+
+  #--------------HOUSING DATA--------------
+
+  #create pandas dataframe with relevant info
+  housing_columns = create_housing_columns()
+  db_housing = pd.read_csv(datapath+datafiles['housing data'],
+                           usecols=housing_columns)
+
+  #Adjust housing for inflation rounded up to nearest $,
+  # then delete inflation rates:
+  for col in housing_columns:
+  
+    if col in ['CONP','ELEP','FULP','GASP','GRNTP','INSP','MHP','MRGP','SMOCP','RNTP','SMP','WATP']:
+      db_housing[col] *= db_housing['ADJHSG']/1E6
+      db_housing[col] = db_housing[col].apply(np.ceil)
+      
+    if col in ['FINCP','HINCP']:
+      db_housing[col] *= db_housing['ADJINC']/1E6
+      db_housing[col] = db_housing[col].apply(np.ceil)
+
+  db_housing.drop(['ADJHSG', 'ADJINC'], inplace=True, axis=1, errors='ignore')
+
+  #print db_housing.count()
+
+  
+
+  #--------------PERSON DATA---------------
+
+  #create pandas dataframe with relevant info
+  person_columns = create_person_columns()
+  db_person = pd.read_csv(datapath+datafiles['person data'],
+                           usecols=person_columns)
+                           
+                           
+  #Adjust housing for inflation, then delete inflation rates:
+  for col in person_columns:
+  
+    if col in ['INTP','OIP','PAP','PERNP','PINCP',
+               'RETP','SEMP','SSIP','SSP','WAGP']:
+      db_person[col] *= db_person['ADJINC']/1E6
+      db_person[col] = db_person[col].apply(np.ceil)
+
+  db_person.drop(['ADJINC'], inplace=True, axis=1, errors='ignore')
+
+
+  #print db_person.loc[db_person['FER']==1]
+
+  #--------------ALL DATA (MERGED)---------------
+  db_all = pd.merge(db_housing, db_person, on = 'SERIALNO')
+  db_all.drop('SERIALNO', inplace=True, axis=1)
+
+  #this removes cases where rent and mortgage are both NaN (one always is)
+  #print db_all.count()
+  db_all.dropna(subset=['GRNTP','MRGP'], how='all', inplace=True)
+  #print db_all.count()
+
+  #we could remove rows with 'FINCP'=NaN, but we set to zero (since by now they have at least one of rent or mortgage)
+  if 'FINCP' in housing_columns:
+    db_all['FINCP'].fillna(0.0, inplace=True)
+  if 'HINCP' in housing_columns:
+    db_all['HINCP'].fillna(0.0, inplace=True)
+
+
+
+  print db_all
+  print db_all.count()
+
+  print db_all[(db_all['GRNTP'].isnull()) & (db_all['FRNTP']==0.0)]
+  print db_all[(db_all['GRNTP'].notnull()) & (db_all['FRNTP']==1.0)]
+
+  print db_all[(db_all['MRGP'].isnull()) & (db_all['FRNTP']==1.0)]
+  print db_all[(db_all['MRGP'].notnull()) & (db_all['FRNTP']==0.0)]
+
+
+
+  #print db_person[db_person['SERIALNO'].astype('str')[4:]=='2015001511431']
+
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 if __name__ == "__main__":
-  makeplots()
+  main()
+
