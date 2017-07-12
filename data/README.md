@@ -1,8 +1,8 @@
 **data:** 
 * The census data based on housing data is from:
-http://www2.census.gov/programs-surveys/acs/data/pums/2015/5-Year/csv_hnm.zip
+  * http://www2.census.gov/programs-surveys/acs/data/pums/2015/5-Year/csv_hnm.zip
 * and from personal data from:
-http://www2.census.gov/programs-surveys/acs/data/pums/2015/5-Year/csv_pnm.zip
+  * http://www2.census.gov/programs-surveys/acs/data/pums/2015/5-Year/csv_pnm.zip
 * The files in data_documentation/ describe the variables in the data sets.
 
 **data-to-postgres.py:**
