@@ -1,4 +1,1 @@
-fig.*
-*.csv
-requirements-*.txt
-conda-requirements-*.txt
+data/data_files/*.csv
