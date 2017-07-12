@@ -1,6 +1,6 @@
-# data: 
+## data: 
 
-The census data based on housing data is from:
+The census data based on housing data can be unzipped into a .csv file from:
 * http://www2.census.gov/programs-surveys/acs/data/pums/2015/5-Year/csv_hnm.zip
 
 and from personal data from:
@@ -10,9 +10,9 @@ The files in data_documentation/ describe the variables in the data sets.
 
 
 ------
-# data-to-postgres.py:
+### data-to-postgres.py:
 
-The data is striped from a data_files.zip file and hosted on the PostgreSQL server which can be linked to remotely with one of the commands:
+The data is striped from a data_files.zip file (which contains the housing and personal data mentioned above) and hosted on the PostgreSQL server which can be linked to remotely with one of the commands:
   * psql -h \<host\> -p \<port\> -u \<database\>
   * psql -h \<host\> -p \<port\> -U \<username\> -W \<password\> \<database\>
   
